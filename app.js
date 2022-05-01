@@ -1,5 +1,7 @@
 const express = require('express')
 // const db = require('./dbConnection')
+const frases = require('./mockup.js')
+
 
 const app = express()
 
@@ -9,13 +11,17 @@ app.set('view engine', 'ejs')
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('./public'))
+app.set('views', './views')
 
 // Rotas
 // ---------------------------------------------
 app.get('/', (req, res) => {
-
-  res.render('index')
-
+  //passamos atraves de um JSON todas as frases
+  res.render('index', { frases: frases })
+});
+app.get('/quebrado', (req, res) => {
+  //passamos atraves de um JSON todas as frases
+  res.render('quebrado',  { frases: frases })
 });
 
 // Start Server
